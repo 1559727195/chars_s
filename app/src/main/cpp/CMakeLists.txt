@@ -25,6 +25,8 @@ add_library( # Sets the name of the library.
         array1.cpp
         dLink.cpp
         stack.cpp
+        Queue.cpp
+        Thread_pool.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

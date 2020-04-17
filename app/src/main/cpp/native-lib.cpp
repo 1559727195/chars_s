@@ -75,44 +75,44 @@ void func2(int **pp) {
 }
 
 
-typedef struct node {
-    char *name;
-    char *passwd;
-    struct node *next;
-} Node;
-
-
-Node *createList() {
-    Node *head = static_cast<Node *>(malloc(sizeof(Node)));
-    head->next = NULL;
-    return head;
-}
-
-
-void insertList(Node *head, Node *item) {
-    item->next = head->next;
-    head->next = item;
-}
-
-
-void travereList(Node *head) {
-    head = head->next;
-
-    while (head) {
-        LOGE("name = %s passwd = %s\n", head->name, head->passwd);
-        head = head->next;
-    }
-}
-
-
-void trimStrSpace(char *str) {
-    char *t = str;
-    while (*str) {
-        if (*str != ' ') { *t++ = *str; }
-        str++;
-    }
-    *t = '\0';
-}
+//typedef struct node {
+//    char *name;
+//    char *passwd;
+//    struct node *next;
+//} Node;
+//
+//
+//Node *createList() {
+//    Node *head = static_cast<Node *>(malloc(sizeof(Node)));
+//    head->next = NULL;
+//    return head;
+//}
+//
+//
+//void insertList(Node *head, Node *item) {
+//    item->next = head->next;
+//    head->next = item;
+//}
+//
+//
+//void travereList(Node *head) {
+//    head = head->next;
+//
+//    while (head) {
+//        LOGE("name = %s passwd = %s\n", head->name, head->passwd);
+//        head = head->next;
+//    }
+//}
+//
+//
+//void trimStrSpace(char *str) {
+//    char *t = str;
+//    while (*str) {
+//        if (*str != ' ') { *t++ = *str; }
+//        str++;
+//    }
+//    *t = '\0';
+//}
 
 
 //void readConfigFile(char *fileName, Node *head) {
@@ -157,6 +157,7 @@ void trimStrLeftSpace(char *str) {
 
 
 #include <pthread.h>
+#include <unistd.h>
 
 pthread_key_t p_key;
 
@@ -196,7 +197,7 @@ struct node1 {
     struct node1 *next;
 };
 
-struct node *creat();
+//struct node *creat();
 
 void print(node1 *pNode1);
 
@@ -584,7 +585,7 @@ int main_stack() {
     stack->init(pstack);
 
     //stack::StackNode pnode = (stack::StackNode) malloc(sizeof(node));
-    stack::StackNode  pnode = (stack::StackNode)malloc(sizeof(node));
+    stack::StackNode pnode = (stack::StackNode) malloc(sizeof(stack::node));
     pnode->name = "karno";
     pnode->grade = 100;
     pnode->age = 23;
@@ -592,15 +593,60 @@ int main_stack() {
     stack->push(pstack, pnode);
     stack->print(pstack);
 
-    stack::StackNode result =  stack->pop(pstack);
+    stack::StackNode result = stack->pop(pstack);
     stack->print(pstack);
 
     return 0;
 }
 
 
+void *test(void *arg) {
+//    int i;
+//    for (i = 0; i < 5; i++) {
+//        sleep(2);
+//        LOGE("tid:%ld task:%ld\n", pthread_self(), (long) arg);
+//    }
+    LOGE("tid:%ld task:%ld\n", pthread_self(), (long) arg);
+    return NULL;
+}
+
+#include "Thread_pool.h"
+
+
+/*
+ * 生产者消费者模式-队列-先进先出，线程锁
+ *
+2020-04-17 14:04:10.843 30152-30152/com.massky.chars_s E/C-test: press enter to terminate ...
+2020-04-17 14:04:10.843 30152-30180/com.massky.chars_s E/C-test: tid:547466171472 task:0
+2020-04-17 14:04:10.843 30152-30181/com.massky.chars_s E/C-test: tid:547461526608 task:1
+2020-04-17 14:04:10.844 30152-30180/com.massky.chars_s E/C-test: tid:547466171472 task:2
+2020-04-17 14:04:10.844 30152-30181/com.massky.chars_s E/C-test: tid:547461526608 task:3
+2020-04-17 14:04:10.844 30152-30180/com.massky.chars_s E/C-test: tid:547466171472 task:4
+*/
+
+int main_threads() {
+    long i = 0;
+    Thread_pool threadPool;
+    Thread_pool::thread_pool_t pool;
+
+    pool = threadPool.thread_pool_create(2);
+
+    for (i = 0; i < 5; i++) {
+        threadPool.thread_pool_add_task(pool, test, (void *) i);
+    }
+
+    LOGE("press enter to terminate ...");
+    getchar();
+
+    threadPool.thread_pool_destroy(pool);
+    return  0;
+
+}
+
+
 int main_s(char *path) {
-    main_stack();
+    main_threads();
+    //main_stack();
     //main_link();
     //main_cmp();
     //main_compare();
