@@ -27,6 +27,7 @@ add_library( # Sets the name of the library.
         stack.cpp
         Queue.cpp
         Thread_pool.cpp
+        TreeNodeClass.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

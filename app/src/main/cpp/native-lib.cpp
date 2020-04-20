@@ -611,6 +611,7 @@ void *test(void *arg) {
 }
 
 #include "Thread_pool.h"
+#include "TreeNodeClass.h"
 
 
 /*
@@ -644,8 +645,70 @@ int main_threads() {
 }
 
 
+
+void main_tree_node()
+{
+    TreeNodeClass *theeNodeClass = new TreeNodeClass();
+
+    theeNodeClass-> CreatBiTree(&(theeNodeClass->Tt));//创建节点
+    theeNodeClass-> LevelTraversal(theeNodeClass->Tt);
+              //声明一个树变量
+//    int dep = 0;                    //树深度变量
+//    int a = 0;
+//    while(true)
+//    {
+//       LOGE("请选择对二叉树的操作：\n");
+//       LOGE("1.创建\n");
+//       LOGE("2.先序遍历\n");
+//       LOGE("3.中序遍历\n");
+//       LOGE("4.后序遍历\n");
+//       LOGE("5.层序遍历\n");
+//       LOGE("6.获取深度\n");
+//       LOGE("7.中序线索化\n");
+//       LOGE("8.遍历线索化二叉树\n");
+//       LOGE("9.退出\n");
+//        a++;
+//        switch(a)
+//        {
+//            case 1:
+//                printf("请输入根节点：\n");
+//                theeNodeClass-> CreatBiTree(&(theeNodeClass->Tt));
+//                break;
+//            case 2:
+//                theeNodeClass->PreorderTraversal(theeNodeClass->Tt);
+//                break;
+//            case 3:
+//                theeNodeClass->InorderTraversal(theeNodeClass->Tt);
+//                break;
+//            case 4:
+//                theeNodeClass-> PostorderTraversal(theeNodeClass->Tt);
+//                break;
+//            case 5:
+//                theeNodeClass-> LevelTraversal(theeNodeClass->Tt);
+//                break;
+//            case 6:
+//                dep =   theeNodeClass->Depth(theeNodeClass->Tt);
+//                printf("树的深度为 %d\n", dep);
+//                break;
+//            case 7:
+//                theeNodeClass->Tt =   theeNodeClass->AddHead(theeNodeClass->Tt);
+//                break;
+//            case 8:
+//                theeNodeClass->TreeCueTraversal(theeNodeClass->Tt);
+//                break;
+//            case 9:
+//                return;
+//            default:
+//                printf("选择错误\n");
+//                break;
+//        }
+//    }
+}
+
+
 int main_s(char *path) {
-    main_threads();
+    main_tree_node();
+  //  main_threads();
     //main_stack();
     //main_link();
     //main_cmp();
