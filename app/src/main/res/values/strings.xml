@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">chars_s</string>
+    <string name="border_top">border_top</string>
+    <string name="border_bottom">border_bottom</string>
 </resources>

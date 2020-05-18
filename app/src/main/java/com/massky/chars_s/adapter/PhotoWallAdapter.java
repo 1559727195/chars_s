@@ -77,7 +77,5 @@ public class PhotoWallAdapter extends ArrayAdapter<String> implements AbsListVie
             // loadBitmaps(firstVisibleItem, visibleItemCount);
             isFirstEnter = false;
         }
-
-
     }
 }

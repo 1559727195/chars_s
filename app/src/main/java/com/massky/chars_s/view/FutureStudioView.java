@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.massky.chars_s.R;
 
 public class FutureStudioView extends FrameLayout {
