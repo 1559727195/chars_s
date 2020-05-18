@@ -640,19 +640,17 @@ int main_threads() {
     getchar();
 
     threadPool.thread_pool_destroy(pool);
-    return  0;
+    return 0;
 
 }
 
 
-
-void main_tree_node()
-{
+void main_tree_node() {
     TreeNodeClass *theeNodeClass = new TreeNodeClass();
 
-    theeNodeClass-> CreatBiTree(&(theeNodeClass->Tt));//创建节点
-    theeNodeClass-> LevelTraversal(theeNodeClass->Tt);
-              //声明一个树变量
+    theeNodeClass->CreatBiTree(&(theeNodeClass->Tt));//创建节点
+    theeNodeClass->LevelTraversal(theeNodeClass->Tt);
+    //声明一个树变量
 //    int dep = 0;                    //树深度变量
 //    int a = 0;
 //    while(true)
@@ -706,9 +704,111 @@ void main_tree_node()
 }
 
 
+#include "BSTree.h"
+#include "MaxHeap.h"
+
+int main_bst() {
+    BSTree<int> t;
+    t.insert(62);
+    t.insert(58);
+    t.insert(47);
+    t.insert(51);
+    t.insert(35);
+    t.insert(37);
+    t.insert(88);
+    t.insert(73);
+    t.insert(99);
+    t.insert(93);
+    t.insert(95);
+
+    //cout << endl << "中序遍历：" << endl;
+    LOGE("中序遍历：");
+    t.inOrder();
+
+   // cout << "最大元素:" << t.search_maximum() << endl;
+   // cout << "最小元素:" << t.search_minimun() << endl;
+        LOGE("最大元素:%d\n",  t.search_maximum());
+        LOGE("最小元素:%d\n",  t.search_minimun());
+
+    //cout << "删除元素99" << endl;
+    LOGE("删除元素99");
+    t.remove(99);
+
+   // cout << "最大元素:" << t.search_maximum() << endl;
+
+    LOGE("最大元素:%d\n",  t.search_maximum());
+
+    t.destory();
+
+    getchar();
+    return 0;
+}
+
+
+void foo_add(char* &p)
+{
+    *p = 'X';
+    p++;
+}
+
+
+
+void foo(char* p)
+{
+    *p = 'X';
+    p++;
+}
+
+int main_cs()
+{
+   // char* p = "Hello";
+
+
+    char *p = NULL;
+    //指针变量 p 在栈中分配 4 字节
+    p = (char *) malloc(100);
+    //本函数在这里开辟了一块堆区的内存空间，并把地址赋值给 p
+    strcpy(p, "Hello");
+    //foo(p);
+    foo_add(p);
+   // cout << p << endl;
+        LOGE("p:%c\n",p[0]);
+    LOGE("str:%s\n",p);
+    return 0;
+}
+
+
+int _tmain_heap()
+{
+    MaxHeap<int> heap(11);
+    //逐个元素构建大顶堆
+    for (int i = 0; i < 10; i++)
+    {
+        heap.insert(i);
+    }
+    heap.print();
+    cout << endl;
+    heap.remove(8);
+    heap.print();
+    cout << endl;
+
+    //根据指定的数组创建大顶堆
+    MaxHeap<int> heap2(11);
+    int a[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    heap2.createMaxHeap(a, 10);
+    heap2.print();
+    getchar();
+    return 0;
+}
+
+
+
+
 int main_s(char *path) {
-    main_tree_node();
-  //  main_threads();
+    //main_cs();
+    main_bst();
+    // main_tree_node();
+    //  main_threads();
     //main_stack();
     //main_link();
     //main_cmp();

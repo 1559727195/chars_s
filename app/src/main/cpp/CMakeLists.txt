@@ -28,6 +28,8 @@ add_library( # Sets the name of the library.
         Queue.cpp
         Thread_pool.cpp
         TreeNodeClass.cpp
+        BSTree.cpp
+        MaxHeap.cpp
         )
 
 # Searches for a specified prebuilt library and stores the path as a

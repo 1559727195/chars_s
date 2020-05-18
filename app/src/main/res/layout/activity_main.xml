@@ -6,14 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
+
+
     <TextView
-        android:id="@+id/sample_text"
+        android:id="@+id/TextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="12"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/TextView2"
+        android:layout_width="wrap_content"
+        android:text="34-------"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/TextView1"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/barrier"
+        app:barrierDirection="right"
+        app:constraint_referenced_ids="TextView1,TextView2"
+
+        ></androidx.constraintlayout.widget.Barrier>
+
+
+    <TextView
+        android:id="@+id/TextView3"
+        android:layout_width="wrap_content"
+        android:text="56"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/barrier" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll_view"
+        ></ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
