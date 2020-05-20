@@ -21,7 +21,7 @@ import com.bumptech.glide.request.target.NotificationTarget
 
 
 
-class GlideActivity : AppCompatActivity() {
+class GlideActivity : AppCompatActivity()  {
     private var img: ImageView? = null
 
     private var list_view: ListView? = null

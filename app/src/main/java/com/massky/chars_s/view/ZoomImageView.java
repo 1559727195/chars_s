@@ -5,9 +5,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+
+import com.massky.chars_s.R;
 
 import androidx.annotation.Nullable;
 
@@ -206,4 +212,5 @@ public class ZoomImageView extends View {
                 matrix.reset();
                 matrix.postScale(1,1);
     }
+
 }
