@@ -7,9 +7,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ListView
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
@@ -71,4 +70,28 @@ class Android10Activity : AppCompatActivity() {
             fos.close()
         }
     }
+
+
+    /**
+     * 判断绑定滑动事件的View是不是一个基础layout，不支持自定义layout，只支持四种基本layout,
+     * AbsoluteLayout已被弃用。
+     *
+     * @return 如果绑定滑动事件的View是LinearLayout,RelativeLayout,FrameLayout,
+     * TableLayout之一就返回true，否则返回false。
+     */
+    private val mBindView: View? = null
+
+    private fun isBindBasicLayout(): Boolean {
+        if (mBindView == null) {
+            return false
+        }
+
+
+        val viewName: String = mBindView.javaClass.getName()
+        return viewName == LinearLayout::class.java.getName() ||
+                viewName == RelativeLayout::class.java.getName() ||
+                viewName == FrameLayout::class.java.getName() ||
+                viewName == TableLayout::class.java.getName()
+    }
+
 }

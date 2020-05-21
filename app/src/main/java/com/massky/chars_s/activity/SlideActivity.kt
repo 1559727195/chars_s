@@ -110,6 +110,9 @@ class SlideActivity : AppCompatActivity(), View.OnClickListener {
         menuParams!!.leftMargin = leftEdge
         // 将content的宽度设置为屏幕宽度
         content!!.getLayoutParams().width = screenWidth as Int
+
+
+
     }
 
     fun onTouch(v: View, event: MotionEvent): Boolean {
@@ -286,6 +289,7 @@ class SlideActivity : AppCompatActivity(), View.OnClickListener {
 
             menuParams!!.leftMargin = leftMargin!!
             menu!!.setLayoutParams(menuParams)
+
         }
 
 
