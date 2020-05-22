@@ -67,12 +67,17 @@ class ScrollerLayout(context: Context?, attrs: AttributeSet?) : ViewGroup(contex
         }
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        when (ev.action) {
+    //   override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+
+    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+
+        when (ev!!.action) {
+            // MotionEvent.ACTION_DOWN -> {
             MotionEvent.ACTION_DOWN -> {
                 mXDown = ev.rawX
                 mXLastMove = mXDown
             }
+            //   MotionEvent.ACTION_MOVE -> {
             MotionEvent.ACTION_MOVE -> {
                 mXMove = ev.rawX
                 val diff = Math.abs(mXMove - mXDown)
@@ -83,11 +88,18 @@ class ScrollerLayout(context: Context?, attrs: AttributeSet?) : ViewGroup(contex
                 }
             }
         }
+        //    return super.onInterceptTouchEvent(ev)
         return super.onInterceptTouchEvent(ev)
     }
 
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
+    //  override fun onTouchEvent(event: MotionEvent): Boolean {
+
+
+    //getScrollX() = view的左边缘在坐标系中的位置,,getCurrX() = 距离原点X方向的绝对值
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        when (event!!.action) {
+            //  MotionEvent.ACTION_MOVE -> {
             MotionEvent.ACTION_MOVE -> {
                 mXMove = event.rawX
                 val scrolledX = (mXLastMove - mXMove).toInt()
@@ -101,6 +113,7 @@ class ScrollerLayout(context: Context?, attrs: AttributeSet?) : ViewGroup(contex
                 scrollBy(scrolledX, 0)
                 mXLastMove = mXMove
             }
+            //   MotionEvent.ACTION_UP -> {
             MotionEvent.ACTION_UP -> {
                 // 当手指抬起时，根据当前的滚动值来判定应该滚动到哪个子控件的界面
                 val targetIndex = (scrollX + width / 2) / width
@@ -110,6 +123,7 @@ class ScrollerLayout(context: Context?, attrs: AttributeSet?) : ViewGroup(contex
                 invalidate()
             }
         }
+        //    return super.onTouchEvent(event)
         return super.onTouchEvent(event)
     }
 
