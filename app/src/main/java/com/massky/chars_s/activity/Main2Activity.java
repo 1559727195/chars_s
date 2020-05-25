@@ -3,6 +3,7 @@ package com.massky.chars_s.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.animation.ValueAnimator;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,12 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.massky.chars_s.R;
+import com.massky.chars_s.view.PointEvaluator;
 
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
@@ -26,6 +29,11 @@ public class Main2Activity extends AppCompatActivity {
 
     ImageView imageView;
     private LruCache<String, Bitmap> mMemoryCache;
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

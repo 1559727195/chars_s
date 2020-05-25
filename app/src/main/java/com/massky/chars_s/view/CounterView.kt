@@ -1,12 +1,15 @@
 package com.massky.chars_s.view
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.opengl.ETC1
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.BounceInterpolator
 
 class CounterView(context: Context?, attrs: AttributeSet?) : View(context, attrs), View.OnClickListener {
     private val mPaint: Paint
@@ -31,6 +34,25 @@ class CounterView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         mCount++
         invalidate()
     }
+
+
+    private fun startAnimation() {
+        val RADIUS = 0.0f
+        val startPoint = Point((getWidth() / 2).toFloat(), RADIUS)
+        val endPoint = Point((getWidth() / 2).toFloat(), getHeight() - RADIUS)
+        val anim = ValueAnimator.ofObject(PointEvaluator(), startPoint, endPoint)
+        anim.addUpdateListener { animation ->
+            var currentPoint = animation.animatedValue as Point
+            invalidate()
+        }
+      //  anim.interpolator = BounceInterpolator()
+        anim.interpolator = BounceInterpolator()
+        anim.duration = 3000
+        anim.start()
+    }
+
+
+
 
     init {
         mPaint = Paint(Paint.ANTI_ALIAS_FLAG)
