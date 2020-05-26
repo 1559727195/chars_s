@@ -1,24 +1,19 @@
 package com.massky.chars_s.activity
 
-import android.animation.ValueAnimator
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.opengl.ETC1.getHeight
-import android.opengl.ETC1.getWidth
-import android.os.AsyncTask
-import android.os.Bundle
+import android.os.*
 import android.util.Log
 import android.util.LruCache
 import android.view.View
-import android.view.animation.BounceInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.massky.chars_s.R
-import com.massky.chars_s.view.Point
-import com.massky.chars_s.view.PointEvaluator
+import com.massky.chars_s.service.MyService
 
 class AnimalActivity : AppCompatActivity() {
     var imageView: ImageView? = null
@@ -27,10 +22,48 @@ class AnimalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         imageView = findViewById<View>(R.id.image_view) as ImageView
+
+
+        // for (i in 0..9) {
+        for (i in 0..9) {
+            val intent = Intent(this@AnimalActivity, MyService::class.java)
+            startService(intent)
+        }
+
+
+        // val mHandlerThread = HandlerThread("LooperThread")
+        val mHandlerThread = HandlerThread("looperThread")
+        mHandlerThread.start()
+        //   val mHandler: Handler = object : Handler(mHandlerThread.looper) {
+        val mHandler: Handler = object : Handler(mHandlerThread.looper) {
+            override fun handleMessage(msg: Message) {
+                // TODO Auto-generated method stub
+                super.handleMessage(msg)
+                Log.w("LooperThread", "handleMessage::Thread id---" + mHandlerThread.id)
+            }
+        }
+
+        object : Thread() {
+            override fun run() {
+                // TODO Auto-generated method stub
+                mHandler.sendEmptyMessage(0)
+                // Log.w(TAG, "Send Message::Thread id ---" + getId());
+            }
+        }.start()
+
+
     }
 
+    // 使用manifest文件 ->standard,single_top,new_task,new_instance,
 
+    //Intent flags
+    //flag_activity_new_task,
+    // flag_activity_clear_top,
+    // flag_activity_single_top
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+    }
 
 
     fun loadImage(view: View?) {
@@ -45,6 +78,7 @@ class AnimalActivity : AppCompatActivity() {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(imageView)
     }
+
 
     private fun get_memory() {
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()

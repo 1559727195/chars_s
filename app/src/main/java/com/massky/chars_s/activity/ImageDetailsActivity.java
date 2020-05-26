@@ -1,13 +1,21 @@
 package com.massky.chars_s.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
+
+import com.massky.chars_s.MainActivity;
+import com.massky.chars_s.service.MyService;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +30,12 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
         String path =null;
         BitmapFactory.decodeFile(path);
+
+
+
+
+
+
     }
 
 
