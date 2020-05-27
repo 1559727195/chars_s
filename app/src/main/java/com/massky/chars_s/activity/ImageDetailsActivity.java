@@ -1,5 +1,7 @@
 package com.massky.chars_s.activity;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,13 +10,16 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewStub;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
 import com.massky.chars_s.MainActivity;
+import com.massky.chars_s.R;
 import com.massky.chars_s.service.MyService;
 
 import androidx.annotation.Nullable;
@@ -41,6 +46,12 @@ public class ImageDetailsActivity extends AppCompatActivity {
 
 
 
+
+
+
+
+
+
     /**
      * 判断绑定滑动事件的View是不是一个基础layout，不支持自定义layout，只支持四种基本layout,
      * AbsoluteLayout已被弃用。
@@ -62,4 +73,15 @@ public class ImageDetailsActivity extends AppCompatActivity {
                 || viewName.equals(TableLayout.class.getName());
     }
 
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        switch (level) {
+            case TRIM_MEMORY_UI_HIDDEN:
+                // 进行资源释放操作
+                break;
+        }
+
+    }
 }

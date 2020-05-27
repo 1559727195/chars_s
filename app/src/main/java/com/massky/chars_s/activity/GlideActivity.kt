@@ -1,24 +1,20 @@
 package com.massky.chars_s.activity
 
-import android.os.Bundle
-import android.widget.ImageView
-import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.ViewTarget
-
-
-import com.massky.chars_s.view.FutureStudioView
-import android.R
-import android.animation.ObjectAnimator
-import android.widget.RemoteViews
 
 import android.app.NotificationManager
 import android.content.Context
-import android.graphics.Bitmap
+import android.os.Bundle
+import android.view.View
+import android.view.ViewStub
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ListView
+import android.widget.RemoteViews
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.NotificationTarget
-
+import com.massky.chars_s.R
 
 
 class GlideActivity : AppCompatActivity()  {
@@ -33,6 +29,16 @@ class GlideActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(com.massky.chars_s.R.layout.glide_lay)
         init_view()
+
+        val viewStub = findViewById<View>(R.id.view_stub) as ViewStub
+        if (viewStub != null) {
+           // val inflatedView = viewStub.inflate()
+            val inflatedView = viewStub.inflate()
+
+//            editExtra1 = inflatedView.findViewById<View>(R.id.edit_extra1) as EditText
+//            editExtra2 = inflatedView.findViewById<View>(R.id.edit_extra2) as EditText
+//            editExtra3 = inflatedView.findViewById<View>(R.id.edit_extra3) as EditText
+        }
     }
 
     private fun init_view() {

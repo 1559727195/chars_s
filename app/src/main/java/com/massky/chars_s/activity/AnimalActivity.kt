@@ -1,5 +1,7 @@
 package com.massky.chars_s.activity
 
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Bitmap
@@ -17,6 +19,9 @@ import com.massky.chars_s.service.MyService
 
 class AnimalActivity : AppCompatActivity() {
     var imageView: ImageView? = null
+
+    var intVal = 42
+    var strVal = "Hello, world!"
     private var mMemoryCache: LruCache<String?, Bitmap>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +57,62 @@ class AnimalActivity : AppCompatActivity() {
         }.start()
 
 
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val heapSize = manager.memoryClass
+
+        //gc
+
+        val leakClass = LeakClass()
+        leakClass.start()
+
+
+
     }
+
+    class Counter {
+        var mCount = 0
+    }
+
+    var mArray: Array<Counter>? = null
+
+    fun zero() {
+        var sum = 0
+       for (i in mArray!!.indices) {
+            sum += mArray!![i].mCount
+        }
+    }
+
+    fun one() {
+        var sum = 0
+        val localArray = mArray
+        val len = localArray!!.size
+        for (i in 0 until len) {
+            sum += localArray[i].mCount
+        }
+    }
+
+    fun two() {
+        var sum = 0
+      for (a in mArray!!) {
+            sum += a.mCount
+        }
+    }
+
+
+    //mat 内存分析工具
+    internal class LeakClass : Thread() {
+        override fun run() {
+            while (true) {
+                try {
+                    sleep(60 * 60 * 1000.toLong())
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+    }
+
+
 
     // 使用manifest文件 ->standard,single_top,new_task,new_instance,
 

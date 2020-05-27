@@ -48,5 +48,11 @@
         android:id="@+id/scroll_view"
         ></ScrollView>
 
+    <include layout="@layout/ok_cancel_layout"></include>
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/ok_cancel_layout"></ViewStub>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

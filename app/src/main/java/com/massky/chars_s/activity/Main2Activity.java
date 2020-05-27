@@ -17,13 +17,28 @@ import android.view.animation.BounceInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.massky.chars_s.R;
+import com.massky.chars_s.request.XMLRequest;
+import com.massky.chars_s.view.BitmapCache;
 import com.massky.chars_s.view.PointEvaluator;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -40,6 +55,75 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.image_view);
+
+        volley_get();
+
+    }
+
+    private void volley_get() {
+        RequestQueue mQueue = Volley.newRequestQueue(Main2Activity.this);
+
+        ImageRequest imageRequest = new ImageRequest(
+                "http://developer.android.com/images/home/aw_dac.png",
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        imageView.setImageBitmap(response);
+                    }
+                }, 0, 0, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                imageView.setImageResource(R.drawable.ic_launcher_background);
+            }
+        });
+
+        mQueue.add(imageRequest);
+
+
+        ImageLoader imageLoader = new ImageLoader(mQueue,new BitmapCache());
+
+
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,
+                R.drawable.ic_launcher_background, R.drawable.ic_launcher_background);
+
+
+        imageLoader.get("https://img-my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", listener);
+
+
+        XMLRequest xmlRequest = new XMLRequest(
+                "http://flash.weather.com.cn/wmaps/xml/china.xml",
+                new Response.Listener<XmlPullParser>() {
+                    @Override
+                    public void onResponse(XmlPullParser response) {
+                        try {
+                            int eventType = response.getEventType();
+                            while (eventType != XmlPullParser.END_DOCUMENT) {
+                                switch (eventType) {
+                                    case XmlPullParser.START_TAG:
+                                        String nodeName = response.getName();
+                                        if ("city".equals(nodeName)) {
+                                            String pName = response.getAttributeValue(0);
+                                            Log.d("TAG", "pName is " + pName);
+                                        }
+                                        break;
+                                }
+                                //eventType = response.next();
+                                eventType = response.next();
+                            }
+                        } catch (XmlPullParserException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        });
+        //  mQueue.add(xmlRequest);
+        mQueue.add(xmlRequest);
     }
 
     public void loadImage(View view) {

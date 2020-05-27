@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-
-
+   <include layout="@layout/activity_grade"></include>
 
     <TextView
         android:id="@+id/TextView1"
@@ -47,6 +45,12 @@
         android:layout_height="match_parent"
         android:id="@+id/scroll_view"
         ></ScrollView>
+
+
+ <com.android.volley.toolbox.NetworkImageView
+     android:layout_width="200dp"
+     android:id="@+id/network_image_view"
+     android:layout_height="200dp"></com.android.volley.toolbox.NetworkImageView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
