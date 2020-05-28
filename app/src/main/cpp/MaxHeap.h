@@ -36,7 +36,7 @@ private:
 
 /*默认构造函数*/
 template<typename T>
-MaxHeap<T>::MaxHeap(int cap = 10) //默认的数组大小为10
+MaxHeap<T>::MaxHeap(int cap) //默认的数组大小为10
         :capacity(cap), size(0), heap(NULL) {
     // heap = new T[capacity];
     heap = new T[capacity];

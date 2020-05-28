@@ -18,16 +18,28 @@
             ></activity>
         <activity android:name=".MainActivity"
             android:launchMode="standard">
+
+        </activity>
+
+        <activity android:name=".activity.AnimalActivity"
+            android:launchMode="singleInstance"></activity>
+        <service android:name=".service.MyService"></service>
+
+        <service android:name=".service.MyService1"
+            android:process=":remote">
+            <intent-filter>
+                <action  android:name="com.massky.chars_s.service.MyAIDLService"></action>
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activity.MainBinderActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.AnimalActivity"
-            android:launchMode="singleInstance"></activity>
-        <service android:name=".service.MyService"></service>
     </application>
 
 </manifest>
