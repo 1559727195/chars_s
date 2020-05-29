@@ -10,6 +10,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Path;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
@@ -56,8 +59,36 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.image_view);
 
+        Handler handler = new Handler();
+
+        handler.post(null);
+        imageView.post(null);
+        runOnUiThread(null);
+        handler.sendEmptyMessage(0);
+
+        Looper.loop();
+
+
         volley_get();
 
+    }
+
+
+
+    class LooperThread extends Thread {
+        public Handler mHandler;
+
+        public void run() {
+            Looper.prepare();
+
+            mHandler = new Handler() {
+                public void handleMessage(Message msg) {
+                    // process incoming messages here
+                }
+            };
+
+            Looper.loop();
+        }
     }
 
     private void volley_get() {
