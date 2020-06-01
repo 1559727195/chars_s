@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.massky.chars_s.R;
 import com.massky.chars_s.request.XMLRequest;
+import com.massky.chars_s.thread.DownloadTask;
 import com.massky.chars_s.view.BitmapCache;
 import com.massky.chars_s.view.PointEvaluator;
 
@@ -70,6 +71,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
         volley_get();
+
+        new DownloadTask().execute();
 
     }
 
