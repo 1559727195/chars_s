@@ -13,12 +13,13 @@ import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.NotificationTarget
 import com.massky.chars_s.R
+import java.net.URL
 
 
-class GlideActivity : AppCompatActivity()  {
-
+class GlideActivity : AppCompatActivity() {
 
 
     private var img: ImageView? = null
@@ -32,7 +33,7 @@ class GlideActivity : AppCompatActivity()  {
 
         val viewStub = findViewById<View>(R.id.view_stub) as ViewStub
         if (viewStub != null) {
-           // val inflatedView = viewStub.inflate()
+            // val inflatedView = viewStub.inflate()
             val inflatedView = viewStub.inflate()
 
 //            editExtra1 = inflatedView.findViewById<View>(R.id.edit_extra1) as EditText
@@ -60,6 +61,51 @@ class GlideActivity : AppCompatActivity()  {
         rv.setTextViewText(com.massky.chars_s.R.id.remoteview_notification_short_message, "Short Message");
 
 
+        /*
+         load:
+         Glide.buildStreamModelLoader(modelClass, context)->
+         buildModelLoader(String, InputStream.class, context)->
+         Map<Class*//*T*//*, Map<Class*//*Y*//*, ModelLoader*//*T, Y*//*>> cachedModelLoaders =
+        new HashMap<String, Map<InputStream, ModelLoader>>()
+        DataFetcher<Y> getResourceFetcher(T model, int width, int height)
+        */
+
+
+        //placeholder->error->disCacheStrategy->override
+
+        //
+        //glide.buildImageViewTarget(view, transcodeClass))->
+        //transcodeClass-Bitmap.class
+        //thumbRequestBuilder
+        //placeholdeder->errorPlaceholder->diskCacheStragy
+
+        //GifBitmapWrapper
+
+        Glide.with(this)
+                .load("")
+                //.downloadOnly(1,1)
+                .asBitmap()
+                // .asGif()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .override(100, 100)
+                .listener(null)
+                //.dontTransform()
+                //.fitCenter()
+                .centerCrop()
+                .into(img)
+                //.preload()
+                //.download
+
+        Glide.with(this)
+                .load("")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(img)
+
+
 // build notification
         val mBuilder = NotificationCompat.Builder(this)
                 .setSmallIcon(com.massky.chars_s.R.mipmap.ic_launcher)
@@ -77,9 +123,6 @@ class GlideActivity : AppCompatActivity()  {
 
         val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         mNotificationManager.notify(NOTIFICATION_ID, notification)
-
-
-
 
 
 //        Glide.with(applicationContext)
@@ -132,13 +175,10 @@ class GlideActivity : AppCompatActivity()  {
     private fun notificationTargets() {
 
 
-
-
         // if it's a custom view class, cast it here
         // then find subviews and do the animations
         // here, we just use the entire view for the fade animation
-       // view.setAlpha( 0f );
-
+        // view.setAlpha( 0f );
 
 
     }
@@ -159,9 +199,6 @@ class GlideActivity : AppCompatActivity()  {
 
 
     }
-
-
-
 
 
     var eatFoodyImages = arrayOf(

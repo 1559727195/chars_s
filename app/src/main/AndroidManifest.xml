@@ -40,6 +40,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <meta-data
+            android:name="com.massky.chars_s.okhttp.MyGlideModule"
+            android:value="GlideModule"></meta-data>
     </application>
 
 </manifest>

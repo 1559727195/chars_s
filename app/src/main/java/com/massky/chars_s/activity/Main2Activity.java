@@ -2,6 +2,7 @@ package com.massky.chars_s.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import okhttp3.OkHttpClient;
 
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.massky.chars_s.R;
+import com.massky.chars_s.interceptor.ProgressInterceptor;
 import com.massky.chars_s.request.XMLRequest;
 import com.massky.chars_s.thread.DownloadTask;
 import com.massky.chars_s.view.BitmapCache;
@@ -59,6 +61,9 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.image_view);
+
+
+
 
         Handler handler = new Handler();
 
