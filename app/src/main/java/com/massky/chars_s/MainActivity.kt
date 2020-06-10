@@ -9,7 +9,7 @@ import android.util.Log
 import android.widget.ScrollView
 import android.widget.Toast
 import android.os.Build
-
+import com.massky.chars_s.utils.LogUtil
 
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
     private fun init_event() {
-
+        LogUtil.instance!!.debug("")
 
         scroll_view!!.getViewTreeObserver().addOnScrollChangedListener({
             Log.d("MainActivity", "getViewTreeObserver - onScrollChanged")
