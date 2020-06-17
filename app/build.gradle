@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 21
     defaultConfig {
         applicationId "com.massky.chars_s"
         minSdkVersion 15
@@ -51,6 +51,9 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
 
-        implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
 }

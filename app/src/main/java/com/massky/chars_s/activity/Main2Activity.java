@@ -1,8 +1,11 @@
 package com.massky.chars_s.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 import android.animation.ValueAnimator;
 import android.content.res.Resources;
@@ -30,8 +33,10 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.massky.chars_s.R;
+import com.massky.chars_s.bean.Repo;
 import com.massky.chars_s.interceptor.ProgressInterceptor;
 import com.massky.chars_s.request.XMLRequest;
+import com.massky.chars_s.service.GitHubService;
 import com.massky.chars_s.thread.DownloadTask;
 import com.massky.chars_s.view.BitmapCache;
 import com.massky.chars_s.view.PointEvaluator;
@@ -44,6 +49,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main2Activity extends AppCompatActivity {
@@ -54,13 +60,12 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.image_view);
+
 
 
 
@@ -171,12 +176,18 @@ public class Main2Activity extends AppCompatActivity {
         Glide
                 .with(this)
                 .load(url)
-                .asGif()
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.asGif()
+              //  .placeholder(R.drawable.ic_launcher_background)
+                //.error(R.drawable.ic_launcher_background)
+                //.diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(imageView);
+
+
+
+
+
     }
+
 
 
     private void get_memory () {

@@ -1,15 +1,19 @@
 package com.massky.chars_s
 
-import androidx.appcompat.app.AppCompatActivity
-import pub.devrel.easypermissions.EasyPermissions
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.ScrollView
 import android.widget.Toast
-import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import com.massky.chars_s.create.Person
+import com.massky.chars_s.factory.Nokia5200
+import com.massky.chars_s.factory.NokiaFactory
+import com.massky.chars_s.factory.NokiaN97
 import com.massky.chars_s.utils.LogUtil
+import pub.devrel.easypermissions.EasyPermissions
 
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -48,6 +52,18 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         //File fileDir =new File(f,"test.txt");
 
+        val buider: Person.Builder = Person.Builder()
+        buider.setAge(13)
+        buider.setName("jack")
+        val jack: Person = buider.build()
+
+
+        val nokiaFactory = NokiaFactory()
+        val nokia5200 = nokiaFactory.createNokia(Nokia5200::class.java)
+        val nokiaN97 = nokiaFactory.createNokia(NokiaN97::class.java)
+        nokia5200.powerOnPhone()
+
+
     }
 
     private fun init_event() {
@@ -63,8 +79,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 Log.d("MainActivity", "setOnScrollChangeListener - onScrollChange")
             })
         }
-
-
     }
 
     private fun init_view() {
