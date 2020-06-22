@@ -40,6 +40,8 @@ import com.massky.chars_s.service.GitHubService;
 import com.massky.chars_s.thread.DownloadTask;
 import com.massky.chars_s.view.BitmapCache;
 import com.massky.chars_s.view.PointEvaluator;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -65,8 +67,6 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imageView = (ImageView) findViewById(R.id.image_view);
-
-
 
 
 
