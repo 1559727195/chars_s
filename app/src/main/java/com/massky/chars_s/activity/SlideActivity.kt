@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.massky.chars_s.R
 
+
 class SlideActivity : AppCompatActivity(), View.OnClickListener {
 
 
