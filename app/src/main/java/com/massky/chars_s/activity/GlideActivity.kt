@@ -12,6 +12,7 @@ import android.widget.ListView
 import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.NotificationTarget
@@ -50,6 +51,7 @@ class GlideActivity : AppCompatActivity() {
 
 
     private fun init_data() {
+        var  recy = RecyclerView()
         // list_view!!.setAdapter(ImageListAdapter(this@GlideActivity, eatFoodyImages))
         Glide.with(this).load("")
         val rv = RemoteViews(getPackageName(), com.massky.chars_s.R.layout.remoteview_notification)
